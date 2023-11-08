@@ -1,11 +1,11 @@
 
-"use server"
 import ButtonComponent from "@/module/shared/component/ButtonComponent";
 
-export async function AdminView() {
+
+export  function AdminView() {
    function addUserHandler() {
 
-  }
+    }
 
   return (
     <>

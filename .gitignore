@@ -35,4 +35,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-node_modules 
+node_modules
+.yarn
+yarn.lock
+.pnp.loader.mjs
+.pnp.cjs
