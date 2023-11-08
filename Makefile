@@ -19,4 +19,3 @@ orm-studio:
 	npx prisma studio
 
 orm-introspect:
-	npx prisma introspect

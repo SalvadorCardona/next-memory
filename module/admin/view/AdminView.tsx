@@ -1,19 +1,12 @@
+import UserFormComponent from "@/module/user/component/UserFormComponent"
+import WrapperComponent from "@/module/shared/component/WrapperComponent"
 
-import ButtonComponent from "@/module/shared/component/ButtonComponent";
-
-
-export  function AdminView() {
-   function addUserHandler() {
-
-    }
-
+export function AdminView() {
   return (
     <>
-      <div>
-        <ButtonComponent onClick={addUserHandler}>
-          add User
-        </ButtonComponent>
-      </div>
+      <WrapperComponent>
+        <UserFormComponent></UserFormComponent>
+      </WrapperComponent>
     </>
   )
 }
