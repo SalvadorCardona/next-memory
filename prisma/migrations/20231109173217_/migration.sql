@@ -1,33 +1,33 @@
 -- CreateTable
 CREATE TABLE "Company" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "Contact" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
-    "companyId" INTEGER NOT NULL,
+    "companyId" TEXT NOT NULL,
     CONSTRAINT "Contact_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "email" TEXT NOT NULL,
     "name" TEXT
 );
 
 -- CreateTable
 CREATE TABLE "Post" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "title" TEXT NOT NULL,
     "content" TEXT,
     "published" BOOLEAN NOT NULL DEFAULT false,
-    "authorId" INTEGER NOT NULL,
+    "authorId" TEXT NOT NULL,
     CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 

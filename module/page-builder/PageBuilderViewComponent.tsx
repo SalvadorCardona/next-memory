@@ -1,0 +1,42 @@
+"use client"
+import { Editor, Frame, Element, useNode, Canvas, useEditor } from "@craftjs/core"
+import ButtonComponent from "@/module/shared/component/form/ButtonComponent"
+import React, { ButtonHTMLAttributes, ReactNode } from "react"
+import GridComponent from "@/module/shared/component/GridComponent"
+import { Toolbox } from "@/module/page-builder/Toolbox"
+import { Panel } from "@/module/page-builder/Panel"
+import { SettingsPanel } from "@/module/page-builder/SettingsPanel"
+import { Container } from "@/module/page-builder/Container"
+import { Button } from "@/module/page-builder/Button"
+import { Text } from "@/module/page-builder/Text"
+
+export interface PageBuilderViewComponentPropsInterface {}
+
+export default function PageBuilderViewComponent() {
+  return (
+    <div className="min-h-screen relative">
+      <div className="grid grid-cols-12 gap-3 h-full p-1">
+        <Editor
+          resolver={{ Toolbox, Panel, SettingsPanel, Container, Button, Text }}
+        >
+          <div className="col-span-2">
+            <Toolbox />
+          </div>
+          <div className="col-span-8">
+            <Panel>
+              <Frame>
+                <Element is={Container} id="root" canvas />
+              </Frame>
+            </Panel>
+          </div>
+          <div className="flex flex-col col-span-2">
+            <div className="grow">
+              <SettingsPanel />
+            </div>
+          </div>
+          <div className="col-span-12"></div>
+        </Editor>
+      </div>
+    </div>
+  )
+}

@@ -1,5 +1,5 @@
 import createUser from "@/module/user/createUser"
-import ButtonComponent from "@/module/shared/component/ButtonComponent"
+import ButtonComponent from "@/module/shared/component/form/ButtonComponent"
 
 export default function UserFormComponent() {
   async function addUserHandler() {

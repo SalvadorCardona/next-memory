@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             className="h-full w-full bg-gray-50 relative overflow-y-auto"
           >
             <main>
-              <div className="pt-6 px-4">{children}</div>
+              <div className="pt-6 px-4 lg:w-1/2 w-full">{children}</div>
             </main>
           </div>
         </div>
