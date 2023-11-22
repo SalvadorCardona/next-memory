@@ -29,38 +29,36 @@ export default function ContactTableComponent(
   }
 
   return (
-    <>
-      <TableComponent onCreate={create}>
-        <TableHead>
-          <TableHeadItem>ID</TableHeadItem>
-          <TableHeadItem>Name</TableHeadItem>
-          <TableHeadItem>Email</TableHeadItem>
-          <TableHeadItem>Phone</TableHeadItem>
-          <TableHeadItem>Company</TableHeadItem>
-          <TableHeadItem>Action</TableHeadItem>
-        </TableHead>
-        <TableBody>
-          {props.data.map((contact) => {
-            return (
-              <TableRow key={contact.id}>
-                <TableCell>{contact.id}</TableCell>
-                <TableCell>{contact.name}</TableCell>
-                <TableCell>{contact.email}</TableCell>
-                <TableCell>{contact.phone}</TableCell>
-                <TableCell>{contact.company.name}</TableCell>
-                <TableCell>
-                  <ButtonComponent
-                    flag={"secondary"}
-                    onClick={() => handleEdit(contact.id)}
-                  >
-                    Edit
-                  </ButtonComponent>
-                </TableCell>
-              </TableRow>
-            )
-          })}
-        </TableBody>
-      </TableComponent>
-    </>
+    <TableComponent onCreate={create}>
+      <TableHead>
+        <TableHeadItem>ID</TableHeadItem>
+        <TableHeadItem>Name</TableHeadItem>
+        <TableHeadItem>Email</TableHeadItem>
+        <TableHeadItem>Phone</TableHeadItem>
+        <TableHeadItem>Company</TableHeadItem>
+        <TableHeadItem>Action</TableHeadItem>
+      </TableHead>
+      <TableBody>
+        {props.data.map((contact) => {
+          return (
+            <TableRow key={contact.id}>
+              <TableCell>{contact.id}</TableCell>
+              <TableCell>{contact.name}</TableCell>
+              <TableCell>{contact.email}</TableCell>
+              <TableCell>{contact.phone}</TableCell>
+              <TableCell>{contact.company.name}</TableCell>
+              <TableCell>
+                <ButtonComponent
+                  flag={"secondary"}
+                  onClick={() => handleEdit(contact.id)}
+                >
+                  Edit
+                </ButtonComponent>
+              </TableCell>
+            </TableRow>
+          )
+        })}
+      </TableBody>
+    </TableComponent>
   )
 }

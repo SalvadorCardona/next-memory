@@ -10,9 +10,9 @@ type ModelNameList = typeof ModelName
 export interface EntityBag<T> {
   factory: (data?: T) => Omit<T, "id">
   modelName: ModelNameList
-  formComponent?: (data?: { data: T }) => JSX.Element
-  listComponent?: (props?: { data: T[] }) => JSX.Element
-  updateComponent?: (props?: { data: T }) => JSX.Element
+  formComponent?: (props?: { data: T }) => JSX.Element | null
+  listComponent?: (props?: { data: T[] }) => JSX.Element | null
+  updateComponent?: (props?: { data: T }) => JSX.Element | null
 }
 
 abstract class Entity<T> {
@@ -20,8 +20,9 @@ abstract class Entity<T> {
   factory(): T {
     return {}
   }
-  formComponent = createElement("div")
-  listComponent = createElement("div")
+  formComponent = null
+  listComponent = null
+  updateComponent = null
 
   async update(data: T) {
     getDatabaseClient()[this.modelName].create({ data })
@@ -39,7 +40,6 @@ abstract class Entity<T> {
 
 class ContactEntity<Contact> extends Entity<Contact> {
   modelName: ModelNameList = "contact"
-
   async getAll(): Contact[] {
     return getDatabaseClient().contact.findMany({
       include: {
@@ -47,8 +47,7 @@ class ContactEntity<Contact> extends Entity<Contact> {
       },
     })
   }
-
-  factory(data?: Contact) {
+  factory(data) {
     return {
       name: data?.name || "",
       email: data?.email || "",

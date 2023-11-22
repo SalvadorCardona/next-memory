@@ -1,4 +1,5 @@
 import { getEntity } from "@/module/shared/entity"
+import TableEntityComponent from "@/module/shared/component/table/TableEntityComponent"
 
 interface PageProps {
   params: {
@@ -13,14 +14,14 @@ export default async function Page(bag: PageProps) {
   }
 
   const List = entity?.listComponent
-  const data = await entity.getAll()
-
-  console.log(data)
+  const datas = await entity.getAll()
+  console.log(datas)
   return (
     <>
       <div>
-        {entity.modelName}
-        <List data={data} />
+        <TableEntityComponent datas={datas} />
+        {/*{entity.modelName}*/}
+        {/*<List data={data} />*/}
       </div>
     </>
   )
