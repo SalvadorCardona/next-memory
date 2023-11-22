@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { TopMenuComponent } from "@/module/admin/component/TopMenuComponent"
 import LeftNavBarComponent from "@/module/admin/component/LeftNavBarComponent"
+import { useRouter } from "next/router"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -27,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             className="h-full w-full bg-gray-50 relative overflow-y-auto"
           >
             <main>
-              <div className="pt-6 px-4 lg:w-1/2 w-full">{children}</div>
+              <div className="pt-6 px-4  w-full">{children}</div>
             </main>
           </div>
         </div>

@@ -1,12 +1,15 @@
 import React, { forwardRef } from "react"
 import { useEditor } from "@craftjs/core"
-
 import { Button } from "./Button"
 import { Text } from "./Text"
-
 import { Panel, PanelSection } from "./Panel"
 
-import { BiImageAdd } from "react-icons/bi"
+import TitleComponent from "@/module/shared/component/TitleComponent"
+import SepratorComponent from "@/module/shared/component/SepratorComponent"
+import { PiRectangleLight } from "react-icons/pi"
+import { BsTextCenter } from "react-icons/bs"
+import { LiaProductHunt } from "react-icons/lia"
+import ProductBuilderComponent from "@/module/page-builder/component/builder/ProductBuilderComponent"
 
 const ToolboxSection = ({ title, children }) => (
   <PanelSection title={title}>
@@ -30,19 +33,30 @@ const ToolboxButton = forwardRef(({ icon, text }, ref) => (
 
 export const Toolbox = () => {
   const { actions, connectors, query, canUndo, canRedo } = useEditor()
-
   return (
     <Panel>
-      <ToolboxSection title="Basics">
+      <TitleComponent size={"sm"}>Components</TitleComponent>
+      <SepratorComponent />
+      <ToolboxSection>
         <ToolboxButton
           ref={(ref) => connectors.create(ref, <Text text="New text" />)}
-          icon={BiImageAdd}
+          icon={BsTextCenter}
           text="Text"
         />
         <ToolboxButton
           ref={(ref) => connectors.create(ref, <Button text="New button" />)}
-          icon={BiImageAdd}
+          icon={PiRectangleLight}
           text="Button"
+        />
+        <ToolboxButton
+          ref={(ref) =>
+            connectors.create(
+              ref,
+              <ProductBuilderComponent productName="nom du produit" />
+            )
+          }
+          icon={LiaProductHunt}
+          text="Product"
         />
       </ToolboxSection>
     </Panel>

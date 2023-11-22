@@ -1,9 +1,11 @@
+"use client"
 import { RxHamburgerMenu } from "react-icons/rx"
 import { HiOutlineBuildingStorefront } from "react-icons/hi2"
 import { RiContactsBookLine, RiPagesLine } from "react-icons/ri"
 import { BsChatRightQuote } from "react-icons/bs"
 import { CiShoppingTag } from "react-icons/ci"
 import { IconType } from "react-icons/lib"
+import { useRouter } from "next/navigation"
 
 export interface LeftNavBarComponentPropsInterface {}
 
@@ -20,17 +22,7 @@ export default function LeftNavBarComponent(
     {
       icon: RxHamburgerMenu,
       name: "Dashboard",
-      link: "/admin/dashboard",
-    },
-    {
-      icon: RiContactsBookLine,
-      name: "Contacts",
-      link: "/admin/projects",
-    },
-    {
-      icon: HiOutlineBuildingStorefront,
-      name: "Companies",
-      link: "/admin/documents",
+      link: "/admin/home",
     },
     {
       icon: RiPagesLine,
@@ -38,14 +30,24 @@ export default function LeftNavBarComponent(
       link: "/admin/page",
     },
     {
+      icon: RiContactsBookLine,
+      name: "Contacts",
+      link: "/admin/contact",
+    },
+    {
+      icon: HiOutlineBuildingStorefront,
+      name: "Companies",
+      link: "/admin/company",
+    },
+    {
       icon: BsChatRightQuote,
       name: "Devis",
-      link: "/admin/settings",
+      link: "/admin/quote",
     },
     {
       icon: CiShoppingTag,
       name: "produits",
-      link: "/admin/logout",
+      link: "/admin/product",
     },
   ]
 
@@ -65,12 +67,19 @@ export default function LeftNavBarComponent(
 }
 
 function MenuItems(props: { menuItems: MenuItemsInterface[] }) {
+  const router = useRouter()
+
+  const handleClick = (menuItems: MenuItemsInterface) => {
+    router.push(menuItems.link)
+  }
+
   return (
     <div className="flex flex-col">
       {props.menuItems.map((item) => (
         <a
           key={item.name}
           href={item.link}
+          onClick={() => handleClick(item)}
           className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
         >
           <item.icon className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75" />

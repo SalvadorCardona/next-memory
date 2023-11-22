@@ -8,7 +8,7 @@ export default function WrapperComponent(props: Props) {
   return (
     <div
       {...props}
-      className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2"
+      className="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border p-6"
     >
       {props.children}
     </div>

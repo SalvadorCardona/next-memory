@@ -11,7 +11,7 @@ export const Container = ({ children, ...props }) => {
       {children ? (
         children
       ) : (
-        <div className="text-center italic p-4 bg-yellow-100 outline-1 outline-dashed outline-amber-400">
+        <div className="text-center  p-4 bg-gray-100 outline-1 outline-dashed outline-gray-400 text-gray-500 font-bold">
           Empty container
         </div>
       )}

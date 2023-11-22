@@ -1,3 +1,5 @@
+import WrapperComponent from "@/module/shared/component/WrapperComponent"
+
 export const PanelSection = ({ title, children }) => {
   return (
     <div className="mb-2">
@@ -8,9 +10,5 @@ export const PanelSection = ({ title, children }) => {
 }
 
 export const Panel = ({ className, children }) => {
-  return (
-    <div className={`p-4 bg-gray-100 shadow-md rounded ${className}`}>
-      {children}
-    </div>
-  )
+  return <WrapperComponent>{children}</WrapperComponent>
 }

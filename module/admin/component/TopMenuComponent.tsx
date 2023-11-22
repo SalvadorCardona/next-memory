@@ -1,12 +1,18 @@
+"use client"
+import { useRouter } from "next/navigation"
+
 export interface LeftBarComponentPropsInterface {}
 // template source : https://tailwindcomponents.com/component/tailwind-css-admin-dashboard-layout/landing
 export function TopMenuComponent(props: LeftBarComponentPropsInterface) {
+  const router = useRouter()
+
   return (
     <nav className="bg-white border-b border-gray-200 fixed z-30 w-full ">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
             <button
+              onClick={() => router.push("/admin")}
               id="toggleSidebarMobile"
               aria-expanded="true"
               aria-controls="sidebar"
@@ -39,11 +45,16 @@ export function TopMenuComponent(props: LeftBarComponentPropsInterface) {
                 ></path>
               </svg>
             </button>
-            <a href="#" className="text-xl font-bold flex items-center lg:ml-2.5">
+            <a
+              href="#"
+              className="text-xl font-bold flex items-center lg:ml-2.5"
+              onClick={() => router.push("/admin")}
+            >
               <img
                 src="https://demo.themesberg.com/windster/images/logo.svg"
                 className="h-6 mr-2"
                 alt="Windster Logo"
+                onClick={() => router.push("/admin")}
               />
               <span className="self-center whitespace-nowrap">Windster</span>
             </a>
@@ -96,7 +107,7 @@ export function TopMenuComponent(props: LeftBarComponentPropsInterface) {
             </button>
 
             <a
-              href="#"
+              onClick={() => router.push("/admin")}
               className="hidden sm:inline-flex ml-5 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3"
             >
               <svg
