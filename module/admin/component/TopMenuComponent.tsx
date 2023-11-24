@@ -53,10 +53,10 @@ export function TopMenuComponent(props: LeftBarComponentPropsInterface) {
               <img
                 src="https://demo.themesberg.com/windster/images/logo.svg"
                 className="h-6 mr-2"
-                alt="Windster Logo"
+                alt="Logo"
                 onClick={() => router.push("/admin")}
               />
-              <span className="self-center whitespace-nowrap">Windster</span>
+              <span className="self-center whitespace-nowrap">NextOrm</span>
             </a>
             <form action="#" method="GET" className="hidden lg:block lg:pl-32">
               <label className="sr-only">Search</label>

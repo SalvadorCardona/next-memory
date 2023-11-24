@@ -23,6 +23,7 @@ export default function TableEntityComponent(
         {keys.map((key) => {
           return <TableHeadItem key={key}>{key}</TableHeadItem>
         })}
+        <TableHeadItem>Action</TableHeadItem>
       </TableHead>
       <TableBody>
         {props.datas.map((data) => {
@@ -54,8 +55,11 @@ export default function TableEntityComponent(
 }
 
 function TableCellPrivate(props: { data: object; keyValue: string }) {
-  const value = getNestedProperty(props.data, props.keyValue)
+  let value = getNestedProperty(props.data, props.keyValue)
 
+  if (typeof value === "object") {
+    value = JSON.stringify(value)
+  }
   if (!value) {
     return <TableCell>undefined</TableCell>
   }

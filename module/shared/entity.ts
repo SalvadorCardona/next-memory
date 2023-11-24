@@ -1,4 +1,4 @@
-import { ModelName } from ".prisma/client"
+import { Company, ModelName } from ".prisma/client"
 import { Contact } from "@prisma/client"
 import ContactFormComponent from "@/module/contact/components/ContactFormComponent"
 import ContactTableComponent from "@/module/contact/components/ContactTableComponent"
@@ -17,7 +17,7 @@ export interface EntityBag<T> {
 
 abstract class Entity<T> {
   modelName: ModelNameList = ""
-  factory(): T {
+  factory(data: Partial<T>): T {
     return {}
   }
   formComponent = null
@@ -38,16 +38,16 @@ abstract class Entity<T> {
   }
 }
 
-class ContactEntity<Contact> extends Entity<Contact> {
+class ContactEntity extends Entity<Contact> {
   modelName: ModelNameList = "contact"
-  async getAll(): Contact[] {
+  async getAll() {
     return getDatabaseClient().contact.findMany({
       include: {
         company: true,
       },
     })
   }
-  factory(data) {
+  factory(data: Partial<Contact>) {
     return {
       name: data?.name || "",
       email: data?.email || "",
@@ -58,7 +58,10 @@ class ContactEntity<Contact> extends Entity<Contact> {
   listComponent = ContactTableComponent
 }
 
-export const entityList: Entity[] = [new ContactEntity()]
+class CompanyEntity extends Entity<Company> {
+  modelName: ModelNameList = "company"
+}
+export const entityList: Entity[] = [new ContactEntity(), new CompanyEntity()]
 
 export function getEntity<T>(modelName: ModelNameList): Entity<T> | undefined {
   return entityList.find((bag) => bag.modelName === modelName.toLowerCase())

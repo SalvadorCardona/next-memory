@@ -15,7 +15,6 @@ export default async function Page(bag: PageProps) {
 
   const List = entity?.listComponent
   const datas = await entity.getAll()
-  console.log(datas)
   return (
     <>
       <div>
