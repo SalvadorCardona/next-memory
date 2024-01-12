@@ -1,11 +1,12 @@
-import { Company, ModelName } from ".prisma/client"
+import { Company, type ModelName } from ".prisma/client"
 import { Contact } from "@prisma/client"
 import ContactFormComponent from "@/module/contact/components/ContactFormComponent"
 import ContactTableComponent from "@/module/contact/components/ContactTableComponent"
 import { createElement } from "react"
 import { getDatabaseClient } from "@/module/shared/prismaClient"
+import TableEntityComponent from "@/module/shared/component/table/TableEntityComponent"
 
-type ModelNameList = typeof ModelName
+type ModelNameList = ModelName
 
 export interface EntityBag<T> {
   factory: (data?: T) => Omit<T, "id">
@@ -18,29 +19,28 @@ export interface EntityBag<T> {
 abstract class Entity<T> {
   modelName: ModelNameList = ""
   factory(data: Partial<T>): T {
-    return {}
+    return { ...data }
   }
   formComponent = null
-  listComponent = null
+  listComponent = TableEntityComponent
   updateComponent = null
 
-  async update(data: T) {
-    getDatabaseClient()[this.modelName].create({ data })
+  update(data: T) {
+    return getDatabaseClient()[this.modelName].create({ data })
   }
 
-  async getAll(): T[] {
-    const result = await getDatabaseClient()[this.modelName].findMany()
-    return result
+  getAll(): Promise<T[]> {
+    return getDatabaseClient()[this.modelName].findMany()
   }
 
-  async getOne(id: number): T {
+  getOne(id: string): Promise<T> {
     return getDatabaseClient()[this.modelName].findUnique({ where: { id } })
   }
 }
 
 class ContactEntity extends Entity<Contact> {
   modelName: ModelNameList = "contact"
-  async getAll() {
+  getAll() {
     return getDatabaseClient().contact.findMany({
       include: {
         company: true,
@@ -55,13 +55,16 @@ class ContactEntity extends Entity<Contact> {
     }
   }
   formComponent = ContactFormComponent
-  listComponent = ContactTableComponent
+  // listComponent = ContactTableComponent
 }
 
 class CompanyEntity extends Entity<Company> {
   modelName: ModelNameList = "company"
 }
-export const entityList: Entity[] = [new ContactEntity(), new CompanyEntity()]
+export const entityList: Entity<unknown>[] = [
+  new ContactEntity(),
+  new CompanyEntity(),
+]
 
 export function getEntity<T>(modelName: ModelNameList): Entity<T> | undefined {
   return entityList.find((bag) => bag.modelName === modelName.toLowerCase())

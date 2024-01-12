@@ -1,5 +1,9 @@
+"use server"
 import { getEntity } from "@/module/shared/entity"
-import TableEntityComponent from "@/module/shared/component/table/TableEntityComponent"
+import TableEntityComponent, {
+  TableEntityComponentPropsInterface,
+} from "@/module/shared/component/table/TableEntityComponent"
+import { createElement } from "react"
 
 interface PageProps {
   params: {
@@ -15,10 +19,17 @@ export default async function Page(bag: PageProps) {
 
   const List = entity?.listComponent
   const datas = await entity.getAll()
+  const listComponent = entity.listComponent
+  const props: TableEntityComponentPropsInterface = {
+    datas,
+    entityName: entity.modelName,
+  }
+
   return (
     <>
       <div>
-        <TableEntityComponent datas={datas} />
+        {createElement(listComponent, { ...props })}
+        {/*<TableEntityComponent datas={datas} />*/}
         {/*{entity.modelName}*/}
         {/*<List data={data} />*/}
       </div>
